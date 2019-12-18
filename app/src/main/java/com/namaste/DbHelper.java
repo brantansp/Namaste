@@ -40,18 +40,36 @@ public class DbHelper extends CopyDatabase{
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query(
+        /*Cursor cursor = sqLiteDatabase.query(
                 Table_Name,
-                new String[] {"NSMC_TERM"},
+                new String[] {"NSMC_TERM","NSMC_CODE","TAMIL_TERM"},
                 "NSMC_TERM" + " LIKE ?",
                 new String[] {query + "%"},
-                null,null,null);
+                null,null,null);*/
+        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT nsmc_term FROM maintable where nsmc_term like '%"+query+"%'",null);
+        Cursor cursor2 = sqLiteDatabase.rawQuery("SELECT DISTINCT nsmc_code FROM maintable where nsmc_code like '%"+query+"%'",null);
+        Cursor cursor3 = sqLiteDatabase.rawQuery("SELECT DISTINCT tamil_term FROM maintable where tamil_term like '%"+query+"%'",null);
 
-        int index = cursor.getColumnIndex("NSMC_TERM");
+        int index1 = cursor1.getColumnIndex("NSMC_TERM");
+        int index2 = cursor2.getColumnIndex("NSMC_CODE");
+        int index3 = cursor3.getColumnIndex("TAMIL_TERM");
 
-        while(cursor.moveToNext()){
-            arrayList.add(cursor.getString(index));
+        while(cursor1.moveToNext()){
+            arrayList.add(cursor1.getString(index1));
+            //arrayList.add(cursor2.getString(index2));
+            //arrayList.add(cursor3.getString(index3));
+        }
 
+        while(cursor2.moveToNext()){
+            //arrayList.add(cursor1.getString(index1));
+            arrayList.add(cursor2.getString(index2));
+            //arrayList.add(cursor3.getString(index3));
+        }
+
+        while(cursor3.moveToNext()){
+            //arrayList.add(cursor1.getString(index1));
+            //arrayList.add(cursor2.getString(index2));
+            arrayList.add(cursor3.getString(index3));
         }
 
         return arrayList;
@@ -111,20 +129,20 @@ public class DbHelper extends CopyDatabase{
     public String getnsmcterm(String word){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        String mean = null;
+        String details = null;
 
-        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + Table_Name + " where " + "NSMC_TERM" + "=  '"+word+"'",null);
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + Table_Name + " where NSMC_TERM ='"+word+"' OR NSMC_CODE ='"+word+"' OR TAMIL_TERM ='"+word+"'", null);
 
         while(cursor.moveToNext()){
-            mean = "NAMC ID : " +cursor.getString(cursor.getColumnIndex("NAMC_ID")) +"\n";
-            mean = mean + "NSMC Term : " +cursor.getString(cursor.getColumnIndex("NSMC_TERM")) +"\n";
-            mean = mean + "NSMC Code : "+ cursor.getString(cursor.getColumnIndex("NSMC_CODE")) +"\n";
-            mean = mean + "Tamil Term : "+ cursor.getString(cursor.getColumnIndex("TAMIL_TERM")) +"\n";
-            mean = mean + "Short Definition : "+ cursor.getString(cursor.getColumnIndex("SHORT_DEFINITION")) +"\n";
-            mean = mean + "Long Definition : "+ cursor.getString(cursor.getColumnIndex("LONG_DEFINITION")) +"\n";
-            mean = mean + "Reference : "+ cursor.getString(cursor.getColumnIndex("REFERENCE"));
+            details = "NAMC ID : " +cursor.getString(cursor.getColumnIndex("NAMC_ID")) +"\n";
+            details = details + "NSMC Term : " +cursor.getString(cursor.getColumnIndex("NSMC_TERM")) +"\n";
+            details = details + "NSMC Code : "+ cursor.getString(cursor.getColumnIndex("NSMC_CODE")) +"\n";
+            details = details + "Tamil Term : "+ cursor.getString(cursor.getColumnIndex("TAMIL_TERM")) +"\n";
+            details = details + "Short Definition : "+ cursor.getString(cursor.getColumnIndex("SHORT_DEFINITION")) +"\n";
+            details = details + "Long Definition : "+ cursor.getString(cursor.getColumnIndex("LONG_DEFINITION")) +"\n";
+            details = details + "Reference : "+ cursor.getString(cursor.getColumnIndex("REFERENCE"));
         }
-        return mean;
+        return details;
     }
 
     public String getnsmccode(String word){
