@@ -2,5 +2,9 @@
     <string name="app_name">Namaste</string>
     <string name="activity_lable">Namaste (NSMC)</string>
     <string name="enter_nsmc_term">Enter term or code/தமிழ் சொற்களை உள்ளிடவும்</string>
+    <string name="Home_Information">
+
+    </string>
+    <string name="todo">TODO</string>
 
 </resources>
