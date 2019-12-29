@@ -36,7 +36,7 @@ public class AndroidSQLite extends AppCompatActivity {
     Button clear;
     ArrayList results;
     AdapterView prestListView;
-
+    ListView listContent ;
     /**
      * Called when the activity is first created.
      */
@@ -46,8 +46,6 @@ public class AndroidSQLite extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        final ListView listContent = (ListView) findViewById(R.id.contentlist);
 
         dbHelper = new DbHelper(this, 1, "namaste.db");
         try {
@@ -68,24 +66,9 @@ public class AndroidSQLite extends AppCompatActivity {
         clear = (Button) findViewById(R.id.clear);
         clear.setVisibility(View.INVISIBLE);
 
-        Cursor cursor = dbHelper.GetAllListViewItems();
-        startManagingCursor(cursor);
+        listContent = (ListView) findViewById(R.id.contentlist);
 
-        String[] from = new String[]{"NAMC_ID", "NSMC_TERM"};
-        int[] to = new int[]{R.id.text};
-
-        SimpleCursorAdapter cursorAdapter =
-                new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
-
-        String[] from1 = new String[]{"NSMC_TERM"};
-        int[] to1 = new int[]{R.id.text2};
-
-        SimpleCursorAdapter cursorAdapter2 =
-                new SimpleCursorAdapter(this, R.layout.row, cursor, from1, to1);
-
-
-        listContent.setAdapter(cursorAdapter2);
-        //listContent.setAdapter(new MySimpleArrayAdapter(this, from));
+        populateAllItemsInListView();
 
         listContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int position, long l) {
@@ -93,7 +76,7 @@ public class AndroidSQLite extends AppCompatActivity {
 
                 ViewResult vr = new ViewResult();
 
-                vr.setSearchText(word.getString(1));
+                vr.setSearchText(word.getString(2));
 
                 //Log.d("STRING IS - ", word.getString(2));
                 Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
@@ -115,9 +98,9 @@ public class AndroidSQLite extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
-                    arrayList.addAll(dbHelper.GetAllWordsnsmcterm(s.toString()));
+                    /*arrayList.addAll(dbHelper.GetAllWordsnsmcterm(s.toString()));
                     autoCompleteTextView2.setAdapter(new ArrayAdapter<String>(AndroidSQLite.this,
-                            android.R.layout.simple_list_item_1, arrayList));
+                            android.R.layout.simple_list_item_1, arrayList));*/
 
                     Cursor cursor = dbHelper.GetMatchingListViewItems(s.toString());
                     startManagingCursor(cursor);
@@ -127,6 +110,23 @@ public class AndroidSQLite extends AppCompatActivity {
                             new SimpleCursorAdapter(AndroidSQLite.this, R.layout.row, cursor, from2, to2);
 
                     listContent.setAdapter(cursorAdapter2);
+
+                    listContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        public void onItemClick(AdapterView<?> av, View view, int position, long l) {
+                            Cursor word = (Cursor) av.getItemAtPosition(position);
+
+                            ViewResult vr = new ViewResult();
+
+                            vr.setSearchText(word.getString(1));
+
+                            //Log.d("STRING IS - ", word.getString(2));
+                            Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
+                            startActivity(getSearchIntent);
+
+                            //textView.setText(dbHelper.getnsmcterm(word));
+
+                        }
+                    });
 
                     clear.setVisibility(View.VISIBLE);
                 } else if (s.length() == 0) {
@@ -182,8 +182,31 @@ public class AndroidSQLite extends AppCompatActivity {
 
     }
 
+    private void populateAllItemsInListView() {
+        Cursor cursor = dbHelper.GetAllListViewItems();
+        startManagingCursor(cursor);
+
+        String[] from = new String[]{"NAMC_ID", "NSMC_TERM"};
+        int[] to = new int[]{R.id.text};
+
+        SimpleCursorAdapter cursorAdapter =
+                new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+
+        String[] from1 = new String[]{"NSMC_TERM"};
+        int[] to1 = new int[]{R.id.text2};
+
+        SimpleCursorAdapter cursorAdapter2 =
+                new SimpleCursorAdapter(this, R.layout.row, cursor, from1, to1);
+
+
+        listContent.setAdapter(cursorAdapter2);
+        //listContent.setAdapter(new MySimpleArrayAdapter(this, from));
+    }
+
     public void clear(View view) {
         autoCompleteTextView2.setText("");
+        listContent = (ListView) findViewById(R.id.contentlist);
+        populateAllItemsInListView();
         //textView.setText("");
         clear.setVisibility(View.GONE);
     }
