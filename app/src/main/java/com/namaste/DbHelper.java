@@ -3,6 +3,10 @@ package com.namaste;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 
 import com.namaste.CopyDatabase;
@@ -150,21 +154,21 @@ public class DbHelper extends CopyDatabase{
 
     }
 
-    public String getnsmcterm(String word){
+    public String [] getnsmcterm(String word){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        String details = null;
+        String [] details = new String [7];
 
         Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + Table_Name + " where NSMC_TERM ='"+word+"' OR NSMC_CODE ='"+word+"' OR TAMIL_TERM ='"+word+"'", null);
 
         while(cursor.moveToNext()){
-            details = "NAMC ID : " +cursor.getString(cursor.getColumnIndex("NAMC_ID")) +"\n";
-            details = details + "NSMC Term : " +cursor.getString(cursor.getColumnIndex("NSMC_TERM")) +"\n";
-            details = details + "NSMC Code : "+ cursor.getString(cursor.getColumnIndex("NSMC_CODE")) +"\n";
-            details = details + "Tamil Term : "+ cursor.getString(cursor.getColumnIndex("TAMIL_TERM")) +"\n";
-            details = details + "Short Definition : "+ cursor.getString(cursor.getColumnIndex("SHORT_DEFINITION")) +"\n";
-            details = details + "Long Definition : "+ cursor.getString(cursor.getColumnIndex("LONG_DEFINITION")) +"\n";
-            details = details + "Reference : "+ cursor.getString(cursor.getColumnIndex("REFERENCE"));
+            details[0]=cursor.getString(cursor.getColumnIndex("NAMC_ID"));
+            details[1]=cursor.getString(cursor.getColumnIndex("NSMC_TERM"));
+            details[2]=cursor.getString(cursor.getColumnIndex("NSMC_CODE"));
+            details[3]=cursor.getString(cursor.getColumnIndex("TAMIL_TERM"));
+            details[4]=cursor.getString(cursor.getColumnIndex("SHORT_DEFINITION"));
+            details[5]=cursor.getString(cursor.getColumnIndex("LONG_DEFINITION"));
+            details[6]=cursor.getString(cursor.getColumnIndex("REFERENCE"));
         }
         return details;
     }

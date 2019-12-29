@@ -5,9 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -86,7 +89,43 @@ public class SearchActivity extends AppCompatActivity {
 
                 String word = (String) parent.getItemAtPosition(position);
 
-                textView.setText(dbHelper.getnsmcterm(word));
+                String [] result = dbHelper.getnsmcterm(word);
+                textView = findViewById(R.id.display);
+                SpannableString ss1=  new SpannableString("NAMC ID : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[0]);
+                textView.append("\n");
+                ss1=  new SpannableString("NSMC Term : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[1]);
+                textView.append("\n");
+                ss1=  new SpannableString("NSMC Code : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[2]);
+                textView.append("\n");
+                ss1=  new SpannableString("Tamil Term : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[3]);
+                textView.append("\n");
+                ss1=  new SpannableString("Short Definition : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[4]);
+                textView.append("\n");
+                ss1=  new SpannableString("Long Definition : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[5]);
+                textView.append("\n");
+                ss1=  new SpannableString("Reference : ");
+                ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                textView.append(ss1);
+                textView.append(result[6]);
+                textView.append("\n");
 
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);

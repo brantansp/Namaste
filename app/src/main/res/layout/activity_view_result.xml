@@ -25,6 +25,7 @@
         android:layout_width="326dp"
         android:layout_height="624dp"
         android:gravity="start|right"
+        android:lineSpacingExtra="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

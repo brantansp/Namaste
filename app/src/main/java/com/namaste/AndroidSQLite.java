@@ -1,24 +1,20 @@
 package com.namaste;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,7 +32,8 @@ public class AndroidSQLite extends AppCompatActivity {
     Button clear;
     ArrayList results;
     AdapterView prestListView;
-    ListView listContent ;
+    ListView listContent;
+
     /**
      * Called when the activity is first created.
      */
@@ -78,12 +75,8 @@ public class AndroidSQLite extends AppCompatActivity {
 
                 vr.setSearchText(word.getString(2));
 
-                //Log.d("STRING IS - ", word.getString(2));
                 Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
                 startActivity(getSearchIntent);
-
-                //textView.setText(dbHelper.getnsmcterm(word));
-
             }
         });
 
@@ -98,6 +91,7 @@ public class AndroidSQLite extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
+                    /*Display In AutoCompleteTextView*/
                     /*arrayList.addAll(dbHelper.GetAllWordsnsmcterm(s.toString()));
                     autoCompleteTextView2.setAdapter(new ArrayAdapter<String>(AndroidSQLite.this,
                             android.R.layout.simple_list_item_1, arrayList));*/
@@ -119,12 +113,8 @@ public class AndroidSQLite extends AppCompatActivity {
 
                             vr.setSearchText(word.getString(1));
 
-                            //Log.d("STRING IS - ", word.getString(2));
                             Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
                             startActivity(getSearchIntent);
-
-                            //textView.setText(dbHelper.getnsmcterm(word));
-
                         }
                     });
 
@@ -145,18 +135,19 @@ public class AndroidSQLite extends AppCompatActivity {
 
         textView = findViewById(R.id.display);
 
-        autoCompleteTextView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /* Displaying information about clicked item in AutoCompleteListView*/
+        /*autoCompleteTextView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String word = (String) parent.getItemAtPosition(position);
 
-                Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
-                startActivity(getSearchIntent);
-
                 //textView.setText(dbHelper.getnsmcterm(word));
                 ViewResult vr = new ViewResult();
                 vr.setSearchText(word);
+
+                Intent getSearchIntent = new Intent(getApplicationContext(), ViewResult.class);
+                startActivity(getSearchIntent);
 
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -164,7 +155,7 @@ public class AndroidSQLite extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
             }
-        });
+        });*/
 
         autoCompleteTextView2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -222,5 +213,3 @@ public class AndroidSQLite extends AppCompatActivity {
     }
 
 }
-
-
