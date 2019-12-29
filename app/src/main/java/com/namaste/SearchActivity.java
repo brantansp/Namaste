@@ -22,11 +22,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     AutoCompleteTextView autoCompleteTextView;
-    AutoCompleteTextView autoCompleteTextView2;
-    AutoCompleteTextView autoCompleteTextView3;
     ArrayList<String> arrayList;
-    ArrayList<String> arrayList2;
-    ArrayList<String> arrayList3;
     DbHelper dbHelper;
     TextView textView;
     Button clear;

@@ -7,14 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv = null;
+    private Boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchClick(View view) {
-        Intent getSearchIntent = new Intent(this, SearchActivity.class);
+        /*Intent getSearchIntent = new Intent(this, SearchActivity.class);
+        startActivity(getSearchIntent);*/
+        Intent getSearchIntent = new Intent(this, AndroidSQLite.class);
         startActivity(getSearchIntent);
     }
+
+    @Override
+    public void onBackPressed(){
+        if (exit) {
+            finish(); // finish activity
+        }
+        else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    // TODO Auto-generated method stub
+                    Intent a = new Intent(Intent.ACTION_MAIN);
+                    a.addCategory(Intent.CATEGORY_HOME);
+                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(a);
+                }
+            }, 1000);
+        }
+    }
+
 }

@@ -34,6 +34,30 @@ public class DbHelper extends CopyDatabase{
         super.onCreate(db);
     }
 
+    public Cursor GetAllListViewItems(){
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT rowid _id, NAMC_ID, NSMC_TERM FROM maintable ORDER by cast (nsmc_term as signed) asc",null);
+
+        return cursor1;
+
+    }
+
+    public Cursor GetMatchingListViewItems(String word){
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT rowid _id, NSMC_TERM FROM maintable where nsmc_term like '%"+word+"%'",null);
+
+        return cursor1;
+
+    }
+
     public ArrayList<String> GetAllWordsnsmcterm(String query){
 
         ArrayList<String> arrayList = new ArrayList<>();

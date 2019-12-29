@@ -12,10 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ListView" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:label="@string/activity_lable"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +27,21 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:screenOrientation="portrait"
             android:label="@string/activity_lable"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewResult"
+            android:label="@string/activity_lable"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AndroidSQLite"
+            android:label="@string/activity_lable"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
     </application>
 
