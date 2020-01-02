@@ -88,7 +88,7 @@ public class ViewResult extends AppCompatActivity {
     {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
-            Intent getSearchIntent = new Intent(this, AndroidSQLite.class);
+            Intent getSearchIntent = new Intent(this, TabbedSearch.class);
             startActivity(getSearchIntent);
             return false;
         }

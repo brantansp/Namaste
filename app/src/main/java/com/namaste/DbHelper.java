@@ -44,19 +44,30 @@ public class DbHelper extends CopyDatabase{
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT rowid _id, NAMC_ID, NSMC_TERM FROM maintable ORDER by cast (nsmc_term as signed) asc",null);
+        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT rowid _id, NAMC_ID, NSMC_TERM, NSMC_CODE, LONG_DEFINITION,SHORT_DEFINITION, TAMIL_TERM FROM maintable ORDER by cast (nsmc_term as signed) asc",null);
 
         return cursor1;
 
     }
 
-    public Cursor GetMatchingListViewItems(String word){
+    public Cursor GetMatchingListViewItems(String word, String column){
 
         ArrayList<String> arrayList = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        Cursor cursor1 = sqLiteDatabase.rawQuery("SELECT DISTINCT rowid _id, NSMC_TERM FROM maintable where nsmc_term like '%"+word+"%'",null);
+        Cursor cursor1 = null;
+
+        if (column.equals("tamilterm")) {
+            cursor1 = sqLiteDatabase.rawQuery("SELECT rowid _id, TAMIL_TERM FROM maintable where TAMIL_TERM like '%"+word+"%'",null);
+        } else if (column.equals("englishterm")) {
+            cursor1 = sqLiteDatabase.rawQuery("SELECT rowid _id, NSMC_TERM FROM maintable where NSMC_TERM like '%"+word+"%'",null);
+        } else if (column.equals("nsmccode")) {
+            cursor1 = sqLiteDatabase.rawQuery("SELECT rowid _id, NSMC_CODE FROM maintable where NSMC_CODE like '%"+word+"%'",null);
+        } else if (column.equals("definition")) {
+            cursor1 = sqLiteDatabase.rawQuery("SELECT rowid _id, SHORT_DEFINITION, LONG_DEFINITION FROM maintable where SHORT_DEFINITION like '%"+word+"%' OR LONG_DEFINITION like '%"+word+"%'",null);
+        }
+
 
         return cursor1;
 
@@ -159,7 +170,7 @@ public class DbHelper extends CopyDatabase{
 
         String [] details = new String [7];
 
-        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + Table_Name + " where NSMC_TERM ='"+word+"' OR NSMC_CODE ='"+word+"' OR TAMIL_TERM ='"+word+"'", null);
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from " + Table_Name + " where NSMC_TERM ='"+word+"' OR NSMC_CODE ='"+word+"' OR TAMIL_TERM ='"+word+"' OR SHORT_DEFINITION ='"+word+"' OR LONG_DEFINITION ='"+word+"'", null);
 
         while(cursor.moveToNext()){
             details[0]=cursor.getString(cursor.getColumnIndex("NAMC_ID"));

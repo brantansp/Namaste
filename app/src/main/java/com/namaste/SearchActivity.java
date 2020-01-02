@@ -3,7 +3,6 @@ package com.namaste;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -49,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         autoCompleteTextView = findViewById(R.id.nsmccode);
-        clear = (Button) findViewById(R.id.clear);
+        clear = (Button) findViewById(R.id.clearSearch1);
         clear.setVisibility(View.INVISIBLE);
 
         arrayList = new ArrayList<>();

@@ -20,7 +20,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <Button
-        android:id="@+id/clear"
+        android:id="@+id/clearSearch1"
         android:layout_width="27dp"
         android:layout_height="25dp"
         android:layout_gravity="end"

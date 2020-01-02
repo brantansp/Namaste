@@ -1,6 +1,5 @@
 package com.namaste;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -60,7 +58,7 @@ public class AndroidSQLite extends AppCompatActivity {
 
 
         autoCompleteTextView2 = findViewById(R.id.autoCompleteTextView2);
-        clear = (Button) findViewById(R.id.clear);
+        clear = (Button) findViewById(R.id.clearSearch1);
         clear.setVisibility(View.INVISIBLE);
 
         listContent = (ListView) findViewById(R.id.contentlist);
@@ -96,7 +94,7 @@ public class AndroidSQLite extends AppCompatActivity {
                     autoCompleteTextView2.setAdapter(new ArrayAdapter<String>(AndroidSQLite.this,
                             android.R.layout.simple_list_item_1, arrayList));*/
 
-                    Cursor cursor = dbHelper.GetMatchingListViewItems(s.toString());
+                    Cursor cursor = dbHelper.GetMatchingListViewItems(s.toString(),"");
                     startManagingCursor(cursor);
                     String[] from2 = new String[]{"NSMC_TERM"};
                     int[] to2 = new int[]{R.id.text2};
