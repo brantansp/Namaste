@@ -7,37 +7,49 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.Test.ui.home.HomeFragment"
+        android:name="com.namaste.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.Test.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_about_scri"
+        android:name="com.namaste.ui.scri.ScriFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_scri" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.Test.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_about_ccrs"
+        android:name="com.namaste.ui.ccrs.CcrsFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_ccrs" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.Test.ui.tools.ToolsFragment"
+        android:id="@+id/nav_nsmc_browse"
+        android:name="com.namaste.ui.nsmc.NsmcFragment"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_nsmc" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.Test.ui.share.ShareFragment"
+        android:id="@+id/nav_features"
+        android:name="com.namaste.ui.features.FeaturesFragment"
         android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_features" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.Test.ui.send.SendFragment"
+        android:id="@+id/nav_disclaimer"
+        android:name="com.namaste.ui.disclaimer.DisclaimerFragment"
         android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_disclaimer" />
+
+    <fragment
+        android:id="@+id/nav_developedby"
+        android:name="com.namaste.ui.developedby.DevelopedbyFragment"
+        android:label="@string/menu_designed"
+        tools:layout="@layout/fragment_developedby" />
+
+    <fragment
+        android:id="@+id/nav_team"
+        android:name="com.namaste.ui.team.TeamFragment"
+        android:label="@string/menu_team"
+        tools:layout="@layout/fragment_team" />
 </navigation>

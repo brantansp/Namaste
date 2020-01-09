@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_about_scri"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_about_ccrs"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/nav_nsmc_browse"
+            android:icon="@drawable/ic_nsmc_browse"
+            android:title="@string/menu_tools" />
+        <item
+            android:id="@+id/nav_features"
+            android:icon="@drawable/ic_feature"
+            android:title="@string/menu_share" />
+        <item
+            android:id="@+id/nav_disclaimer"
+            android:icon="@drawable/ic_disclaimer"
+            android:title="@string/menu_send" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_team"
+                android:icon="@drawable/ic_team"
+                android:title="@string/menu_team" />
+            <item
+                android:id="@+id/nav_developedby"
+                android:icon="?attr/actionModeSelectAllDrawable"
+                android:title="@string/menu_designed" />
+        </menu>
+    </item>
+
+</menu>
